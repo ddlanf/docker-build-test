@@ -1,6 +1,10 @@
 ﻿var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://0.0.0.0:8080");
 
+string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+string url = String.Concat("http://0.0.0.0:", port);
+builder.WebHost.UseUrls(url);
+
+Console.WriteLine(port);
 builder.Services.AddControllersWithViews();
 
 
@@ -13,9 +17,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 
